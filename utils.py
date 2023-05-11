@@ -48,7 +48,7 @@ def listar():
         checagem(produtos)
     elif opc == 3:
         nome = input('Qual o nome do produto? \n')
-        cursor.execute(f'SELECT * FROM produtos WHERE nome = {nome}')
+        cursor.execute(f"SELECT * FROM produtos WHERE nome = '{nome}'")
         produtos = cursor.fetchall()
         checagem(produtos)
     else:
