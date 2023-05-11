@@ -1,6 +1,5 @@
 import MySQLdb
 
-
 def conectar():
     try:
         conn = MySQLdb.connect(
@@ -25,8 +24,16 @@ def checagem(produtos):
             for produto in produtos:
                 print('--------------------')
                 print(f'ID: {produto[0]}, Nome: {produto[1]}, Preço: {produto[2]}, Estoque: {produto[3]}, Tipo: {produto[4]}')
+            print('Deseja voltar ao menu? 1 - Sim, 2 - Não')
+            opc = input('Opção: ')
+            if opc == 1:
+                menu()
+            else:
+                print('Até mais!')
+                exit()
     else:
         print("Sem produtos cadastrados")
+        menu()
 
 def listar():
     conn = conectar()
@@ -35,7 +42,7 @@ def listar():
     print('1 - Todos os produtos ')
     print('2 - Tipo de produto')
     print('3 - Produto especifico \n')
-    opc = int(input())
+    opc = int(input('Opção: '))
 
     if opc == 1:
         cursor.execute('SELECT p.id, p.nome, p.preco, p.estoque, tp.nome FROM produtos AS p, tipo_produto AS tp WHERE p.id_tipo_produto = tp.id')
@@ -128,7 +135,8 @@ def menu():
     print('3 - Atualizar um produto: ')
     print('4 - Excluir um produto: ')
     print('5 - Encerrar \n')
-    opcao = int(input())
+    opcao = int(input('Opção: '))
+    print('-----------------------------------')
     if opcao == 1:
         listar()
     elif opcao == 2:
